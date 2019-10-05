@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -52,7 +52,9 @@ export default class HomeScreen extends Component {
                     <ActionButton.Item
                         buttonColor='#03fc84'
                         title="Personal Information"
-                        onPress={() => { this.props.navigation.navigate('QRCodeScanner') }}>
+                        onPress={() => { 
+                            AsyncStorage.removeItem('Doctor_CNIC');
+                            this.props.navigation.navigate('OptionScreen') }}>
                         <Icon
                             name="cog"
                             style={styles.actionButtonIcon} />

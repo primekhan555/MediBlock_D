@@ -6,8 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { voidTypeAnnotation } from '@babel/types';
 
 export default class SignIn extends Component {
-    static navigationOptions={
-        headerLeft:null
+    static navigationOptions = {
+        headerStyle:{
+            backgroundColor:'#b063c5'
+        },
+        headerLeft: null
     }
     constructor(props) {
         super(props)
@@ -35,6 +38,8 @@ export default class SignIn extends Component {
                         <View style={styles.TextInputView}>
                             <Text style={{ marginStart: 25, fontWeight: 'bold', fontSize: 17 }}>CNIC & Password</Text>
                             <TextInput
+                                returnKeyType={'next'}
+                                onSubmitEditing={() => this.passwordRef.focus()}
                                 style={styles.TextInput}
                                 label="nic"
                                 placeholder=" 16202-0195532-5"
@@ -62,12 +67,13 @@ export default class SignIn extends Component {
 
                         <View style={styles.TextInputViewPass}>
                             <TextInput
+                                ref={passwordRef => this.passwordRef = passwordRef}
                                 style={styles.TextInput}
                                 placeholder=" Password"
                                 keyboardType="default"
                                 secureTextEntry={this.state.passEyeState}
                                 placeholderTextColor="#857777"
-                                underlineColorAndroid="#ff6666"
+                                underlineColorAndroid="#b063c5"
                                 onChangeText={(password) => {
                                     this.setState({
                                         pass: password,
@@ -92,45 +98,45 @@ export default class SignIn extends Component {
                                     //     console.log("your nic pattern is not Valid")
                                     // }
                                     // else {
-                                        // console.log("your pattern is matching")
-                                        const url = 'https://f8f3f569.ngrok.io/api/Patient/';
-                                        const key = this.state.nic;
-                                        const join = url.concat(key);
-                                        fetch(join)
-                                            .then((response) => response.status)
-                                            .then((statusCode) => {
-                                                if (statusCode == 404) {
-                                                    alert("signUp first")
-                                                }
-                                                else if (statusCode == 200 || statusCode == 304) {
-                                                    fetch(join)
-                                                        .then((response) => response.json())
-                                                        .then((responseJson) => {
-                                                            this.setState({
-                                                                isLoading: false,
-                                                                dataSource: responseJson.lastName,
-                                                            })
+                                    // console.log("your pattern is matching")
+                                    const url = 'https://f8f3f569.ngrok.io/api/Patient/';
+                                    const key = this.state.nic;
+                                    const join = url.concat(key);
+                                    fetch(join)
+                                        .then((response) => response.status)
+                                        .then((statusCode) => {
+                                            if (statusCode == 404) {
+                                                alert("signUp first")
+                                            }
+                                            else if (statusCode == 200 || statusCode == 304) {
+                                                fetch(join)
+                                                    .then((response) => response.json())
+                                                    .then((responseJson) => {
+                                                        this.setState({
+                                                            isLoading: false,
+                                                            dataSource: responseJson.lastName,
                                                         })
-                                                        .then(() => {
-                                                            if (this.state.dataSource == this.state.pass) {
-                                                                let cnic = this.state.nic.toString();
-                                                                AsyncStorage.setItem('Doctor_CNIC', JSON.stringify(cnic), () => {
-                                                                    this.props.navigation.navigate('HomeScreen', {
-                                                                        cnic1: this.state.nic,
-                                                                    })
-                                                                    console.log("i am inside")
+                                                    })
+                                                    .then(() => {
+                                                        if (this.state.dataSource == this.state.pass) {
+                                                            let cnic = this.state.nic.toString();
+                                                            AsyncStorage.setItem('Doctor_CNIC', JSON.stringify(cnic), () => {
+                                                                this.props.navigation.navigate('HomeScreen', {
+                                                                    cnic1: this.state.nic,
                                                                 })
-                                                            }
-                                                            else {
-                                                                console.log("password is incorrect")
-                                                            }
-                                                        })
-                                                        .catch((error) => {
-                                                            console.error(error)
-                                                        });
-                                                }
-                                            })
-                                    
+                                                                console.log("i am inside")
+                                                            })
+                                                        }
+                                                        else {
+                                                            console.log("password is incorrect")
+                                                        }
+                                                    })
+                                                    .catch((error) => {
+                                                        console.error(error)
+                                                    });
+                                            }
+                                        })
+
                                 }}>
                                 <Text style={styles.buttonText}>Continue</Text>
                             </TouchableOpacity>
@@ -145,12 +151,12 @@ export default class SignIn extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#ff6666'
+        backgroundColor: '#b063c5'
     },
     firstContainer: {
         flex: 30,
         height: 300,
-        backgroundColor: '#ff6666',
+        backgroundColor: '#b063c5',
     },
     secondContainer: {
         flex: 70,
@@ -171,7 +177,7 @@ const styles = StyleSheet.create({
         marginEnd: 10,
         height: 40,
         fontSize: 16,
-        color: '#ff6666'
+        color: 'black'
     },
     TextInputView: {
         marginTop: 30,
@@ -184,7 +190,7 @@ const styles = StyleSheet.create({
         // flexDirection:'row',
     },
     opacity: {
-        backgroundColor: '#ff6666',
+        backgroundColor: '#b063c5',
         width: 230,
         height: 40,
         alignItems: 'center',

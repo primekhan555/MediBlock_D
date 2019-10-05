@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+
+let {width, height} = Dimensions.get('window');
 
 export default class OptionsScreen extends Component {
-    static navigationOptions={
-        header:null,
-        headerLeft:null
+    static navigationOptions = {
+        header: null,
+        headerLeft: null
     }
 
 
@@ -17,13 +19,22 @@ export default class OptionsScreen extends Component {
             <View style={styles.container}>
                 <View style={styles.nameContainer}>
                     <Text style={styles.nameText}>MediBlock</Text>
+                    <Text style={{
+                        color:'#ffffff',
+                        alignContent:"center",
+                        justifyContent:"center",
+                        marginTop:3,
+                        fontSize:35,
+                        fontWeight:"bold",
+                        letterSpacing:1.2
+                        }}>Doc</Text>
                 </View>
 
                 <View style={styles.optionContainer}>
                     <View style={styles.signInView}>
                         <TouchableOpacity style={styles.signInOpacity}
                             onPress={() => {
-                                this.props.navigation.navigate('Signin')
+                                this.props.navigation.navigate('SignIn')
                             }}>
                             <Text style={styles.signInText}>sign In</Text>
                         </TouchableOpacity>
@@ -31,7 +42,7 @@ export default class OptionsScreen extends Component {
                     <View style={styles.signUpView}>
                         <TouchableOpacity style={styles.signUpOpacity}
                             onPress={() => {
-                                this.props.navigation.navigate('Signup')
+                                this.props.navigation.navigate('SignUp')
                             }}>
                             <Text style={styles.signUpText}>Sign Up</Text>
                         </TouchableOpacity>
@@ -48,7 +59,7 @@ const styles = StyleSheet.create({
     },
     nameContainer: {
         flex: 70,
-        backgroundColor: '#ff6666',
+        backgroundColor: '#b063c5',
         borderBottomEndRadius: 40,
         borderBottomStartRadius: 40,
         justifyContent: 'center',
@@ -63,8 +74,9 @@ const styles = StyleSheet.create({
         fontSize: 40,
         alignContent: 'center',
         justifyContent: 'center',
-        marginTop: 200
-
+        marginTop: 200,
+        fontWeight:"bold",
+        letterSpacing:1.2
     },
     signInView: {
         alignItems: 'center',
@@ -76,13 +88,13 @@ const styles = StyleSheet.create({
         width: 230,
         height: 40,
         borderRadius: 10,
-        backgroundColor: '#ff6666'
+        backgroundColor: '#b063c5'
     },
     signUpView: {
         alignItems: 'center'
     },
     signUpOpacity: {
-        borderColor: '#ff6666',
+        borderColor: '#b063c5',
         width: 230,
         height: 40,
         marginTop: 20,
@@ -99,7 +111,7 @@ const styles = StyleSheet.create({
     signUpText: {
         fontWeight: 'bold',
         fontSize: 16,
-        color: '#ff6666'
+        color: '#b063c5'
     },
 });
 

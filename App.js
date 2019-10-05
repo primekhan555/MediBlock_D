@@ -7,18 +7,11 @@
  */
 
 import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import SplashScreen from './Screens/SplashScreen';
-import OptionScreen from './Screens/OptionsScreen';
+import OptionScreen from './Screens/OptionScreen';
 import SignIn from './Screens/SignIn';
 import SignUp from './Screens/SignUp';
 import Information1 from './Screens/Information1';

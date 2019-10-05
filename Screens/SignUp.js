@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 export default class SignUp extends Component {
-  static navigationOptions={
-    headerLeft:null,
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: '#b063c5'
+    },
+    headerLeft: null,
   }
   constructor(props) {
     super(props)
@@ -31,10 +35,12 @@ export default class SignUp extends Component {
             <View style={styles.TextInputView}>
               <TextInput
                 style={styles.cnicInput}
+                returnKeyType={'next'}
                 placeholder=" 16202-0195532-5"
                 keyboardType="decimal-pad"
                 placeholderTextColor="#857777"
                 underlineColorAndroid={this.state.fieldUnderlineColorcnic}
+                onSubmitEditing={() => this.passwordRef1.focus()}
                 onChangeText={(value) => {
                   const regex = /^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$/;
                   var pattern = regex.test(value);
@@ -55,6 +61,9 @@ export default class SignUp extends Component {
             </View>
             <View style={styles.TextInputView}>
               <TextInput
+                ref={passwordRef => this.passwordRef1 = passwordRef}
+                returnKeyType='next'
+                onSubmitEditing={()=>this.passwordRef2.focus()}
                 style={styles.cnicInput}
                 placeholder=" Password"
                 keyboardType="default"
@@ -71,6 +80,7 @@ export default class SignUp extends Component {
             </View>
             <View style={styles.TextInputView}>
               <TextInput
+              ref={passwordref=>this.passwordRef2=passwordref}
                 style={styles.cnicInput}
                 placeholder=" Confirm Password"
                 keyboardType="default"
@@ -112,29 +122,29 @@ export default class SignUp extends Component {
                   // var pattern = regex.test(this.state.cnic);
                   // if (pattern) {
                   //   console.log("your cnic is matching")
-                    if (this.state.pass1 == this.state.pass2) {
-                      console.log("password confirmed")
-                      const url = 'https://f8f3f569.ngrok.io/api/Patient/';
-                      const key = this.state.cnic;
-                      const join = url.concat(key);
+                  if (this.state.pass1 == this.state.pass2) {
+                    console.log("password confirmed")
+                    const url = 'https://f8f3f569.ngrok.io/api/Patient/';
+                    const key = this.state.cnic;
+                    const join = url.concat(key);
 
-                      fetch(join)
-                        .then((response) => response.status
-                        ).then((statusCode) => {
-                          if (statusCode == 404) {
-                            this.props.navigation.navigate('Information1',{ 
-                              nic:this.state.cnic,
-                              pass:this.state.pass2,
-                             })
-                          }
-                          else if(statusCode ==200){
-                            alert("your CNIC is already registered, please SignIn");
-                          }
-                        })
-                    }
-                    else {
-                      console.log("password is not matching")
-                    }
+                    fetch(join)
+                      .then((response) => response.status
+                      ).then((statusCode) => {
+                        if (statusCode == 404) {
+                          this.props.navigation.navigate('Information1', {
+                            nic: this.state.cnic,
+                            pass: this.state.pass2,
+                          })
+                        }
+                        else if (statusCode == 200) {
+                          alert("your CNIC is already registered, please SignIn");
+                        }
+                      })
+                  }
+                  else {
+                    console.log("password is not matching")
+                  }
                   // }
                   // else {
                   //   console.log("your cnic is incorrect")
@@ -156,12 +166,12 @@ export default class SignUp extends Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#ff6666'
+    backgroundColor: '#b063c5'
   },
   container1: {
     flex: 30,
     height: 300,
-    backgroundColor: '#ff6666',
+    backgroundColor: '#b063c5',
 
   },
   secondView: {
@@ -205,7 +215,7 @@ const styles = StyleSheet.create({
     width: '100'
   },
   opacity: {
-    backgroundColor: '#ff6666',
+    backgroundColor: '#b063c5',
     width: 230,
     height: 40,
     alignItems: 'center',

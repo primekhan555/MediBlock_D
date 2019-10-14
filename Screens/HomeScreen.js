@@ -53,8 +53,7 @@ export default class HomeScreen extends Component {
                         buttonColor='#03fc84'
                         title="Personal Information"
                         onPress={() => { 
-                            AsyncStorage.removeItem('Doctor_CNIC');
-                            this.props.navigation.navigate('OptionScreen') }}>
+                            this.props.navigation.navigate('PersonalInfo') }}>
                         <Icon
                             name="cog"
                             style={styles.actionButtonIcon} />

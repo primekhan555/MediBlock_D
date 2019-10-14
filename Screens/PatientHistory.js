@@ -115,7 +115,7 @@ export default class PatientHistory extends Component {
                 CNIC: result,
             })
         });
-        return fetch('https://f8f3f569.ngrok.io/api/Disease/')
+        return fetch('https://e4943289.ngrok.io/api/Disease/')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({

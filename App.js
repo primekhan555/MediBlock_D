@@ -19,6 +19,7 @@ import HomeScreen from './Screens/HomeScreen';
 import QRCodeScanner from './Screens/QRCodeScanner';
 import PinCodeScreen from './Screens/PinCodeScreen';
 import PatientHistory from './Screens/PatientHistory';
+import PersonalInfo from './Screens/PersonalInfo';
 
 const App = createStackNavigator({
   SplashScreen:{
@@ -47,6 +48,9 @@ const App = createStackNavigator({
   },
   PatientHistory:{
     screen:PatientHistory,
+  },
+  PersonalInfo:{
+    screen:PersonalInfo,
   },
 });
 export default createAppContainer(App);

@@ -128,19 +128,20 @@ export default class Information1 extends Component {
                                             return;
                                         }
                                         let block={
-                                            "$class": "com.org.hello.Patient",
+                                            "$class": "org.com.mediblocking.Doctor",
                                             "nicNum": this.state.CNIC,
                                             "firstName": this.state.fullName,
                                             "lastName": this.state.password,
                                             "address": this.state.email,
                                             "phoneNum": "03429188353",
-                                            "age": this.state.age,
                                             "gender": this.state.gender,
                                             "dateofBirth":this.state.dateofBirth,
-                                            "bloodType":"B_Positive"
+                                            "university":"B_Positive",
+                                            "Specilization":"Dentist",
+                                            "Degree":"MBBS"
                                         }
 
-                                        fetch('https://f8f3f569.ngrok.io/api/Patient/', {
+                                        fetch('https://e4943289.ngrok.io/api/Doctor/', {
                                             method: 'POST',
                                             headers: {
                                                 Accept: 'application/json',

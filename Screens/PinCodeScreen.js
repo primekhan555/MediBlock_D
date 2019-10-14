@@ -97,9 +97,7 @@ export default class PinCodeScreen extends Component {
                                     var second = new Date().getTime() / 1000;
                                     var roundedSecond = Math.round(second);
                                     if (fixedSecond >= roundedSecond) {
-                                        console.log("fixed   :" + fixedSecond)
-                                        console.log("rounded :" + roundedSecond)
-                                        console.log("your code is valid");
+                                        
                                         var pinCodeC=this.state.pinCode;
                                         var pinCodeE=this.state.fieldValue;
 

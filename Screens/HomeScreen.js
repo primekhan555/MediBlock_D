@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, AsyncStorage } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -15,6 +15,8 @@ export default class HomeScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
+                <StatusBar backgroundColor='#b063c5' barStyle='default' hidden={false} translucent={false} />
+
                 <Text>Home Screen</Text>
 
                 <ActionButton
@@ -52,8 +54,9 @@ export default class HomeScreen extends Component {
                     <ActionButton.Item
                         buttonColor='#03fc84'
                         title="Personal Information"
-                        onPress={() => { 
-                            this.props.navigation.navigate('PersonalInfo') }}>
+                        onPress={() => {
+                            this.props.navigation.navigate('PersonalInfo')
+                        }}>
                         <Icon
                             name="cog"
                             style={styles.actionButtonIcon} />

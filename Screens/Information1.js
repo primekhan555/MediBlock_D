@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput, ScrollView, TouchableOpacity, Picker } from 'react-native';
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import { white, black } from 'ansi-colors';
 
 export default class Information1 extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
-    _storeCNIC = async ()=>{
-    try {
-        await AsyncStorage.setItem('CNIC', this.state.CNIC);
-        console.log("cnic saved successfully")
-      } catch (error) {
-        console.log("error in saving")
-      }
+    _storeCNIC = async () => {
+        try {
+            await AsyncStorage.setItem('CNIC', this.state.CNIC);
+            console.log("cnic saved successfully")
+        } catch (error) {
+            console.log("error in saving")
+        }
     };
     state = {
         CNIC: this.props.navigation.getParam('nic', ''),
-        password: this.props.navigation.getParam('pass',''),
+        password: this.props.navigation.getParam('pass', ''),
         fullName: '',
         email: '',
         gender: 'Male',
@@ -105,9 +105,9 @@ export default class Information1 extends Component {
                                         }
                                     }}
                                     onDateChange={(newDate) => {
-                                        var fullDate= newDate.concat("T00:00:00.000Z");
+                                        var fullDate = newDate.concat("T00:00:00.000Z");
                                         this.setState({
-                                            dateofBirth:fullDate
+                                            dateofBirth: fullDate
                                         })
                                         var allDate = newDate.split("-");
                                         var intDate = parseInt(allDate[0])
@@ -124,10 +124,10 @@ export default class Information1 extends Component {
                             <View style={styles.nextOpacityView}>
                                 <TouchableOpacity style={styles.nextOpacity}
                                     onPress={() => {
-                                        if(this.state.CNIC == ''){
+                                        if (this.state.CNIC == '') {
                                             return;
                                         }
-                                        let block={
+                                        let block = {
                                             "$class": "org.com.mediblocking.Doctor",
                                             "nicNum": this.state.CNIC,
                                             "firstName": this.state.fullName,
@@ -135,10 +135,10 @@ export default class Information1 extends Component {
                                             "address": this.state.email,
                                             "phoneNum": "03429188353",
                                             "gender": this.state.gender,
-                                            "dateofBirth":this.state.dateofBirth,
-                                            "university":"B_Positive",
-                                            "Specilization":"Dentist",
-                                            "Degree":"MBBS"
+                                            "dateofBirth": this.state.dateofBirth,
+                                            "university": "B_Positive",
+                                            "Specilization": "Dentist",
+                                            "Degree": "MBBS"
                                         }
 
                                         fetch('https://e4943289.ngrok.io/api/Doctor/', {
@@ -148,7 +148,6 @@ export default class Information1 extends Component {
                                                 'Content-Type': 'application/json',
                                             },
                                             body: JSON.stringify(block),
-
                                         })
                                             .then((response) => response.status)
                                             .then((responseStatus) => {
@@ -157,7 +156,7 @@ export default class Information1 extends Component {
                                                     let cnic = this.state.CNIC.toString();
                                                     AsyncStorage.setItem('Doctor_CNIC', JSON.stringify(cnic), () => {
                                                         this.props.navigation.navigate('HomeScreen', {
-                                                            cnic:this.state.CNIC,
+                                                            cnic: this.state.CNIC,
                                                         })
                                                         console.log("i am inside")
                                                     })
@@ -165,7 +164,7 @@ export default class Information1 extends Component {
                                                 }
                                             })
                                         // console.log(this.state.dateofBirth); // Hours
-                                        
+
                                     }}>
                                     <Text style={styles.textnextOpacity}>Next</Text>
                                 </TouchableOpacity>

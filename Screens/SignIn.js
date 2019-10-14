@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, } from 'react-native';
+import { View, Text, StatusBar, TextInput, StyleSheet, TouchableOpacity, ScrollView, } from 'react-native';
 import { AsyncStorage } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -7,8 +7,9 @@ import { voidTypeAnnotation } from '@babel/types';
 
 export default class SignIn extends Component {
     static navigationOptions = {
-        headerStyle:{
-            backgroundColor:'#b063c5'
+        headerStyle: {
+            backgroundColor: '#b063c5',
+
         },
         headerLeft: null
     }
@@ -30,6 +31,8 @@ export default class SignIn extends Component {
         return (
 
             <View style={styles.mainContainer}>
+                <StatusBar backgroundColor='#b063c5' barStyle='default' hidden={false} translucent={false} />
+
                 <View style={styles.firstContainer}>
                     <Text style={styles.firstContainerText}>Sign In</Text>
                 </View>

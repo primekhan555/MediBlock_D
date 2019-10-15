@@ -20,22 +20,23 @@ import QRCodeScanner from './Screens/QRCodeScanner';
 import PinCodeScreen from './Screens/PinCodeScreen';
 import PatientHistory from './Screens/PatientHistory';
 import PersonalInfo from './Screens/PersonalInfo';
+import PatientInfoScreen from './Screens/PatientInfoScreen';
 
 const App = createStackNavigator({
-  SplashScreen:{
-    screen:SplashScreen,
+  SplashScreen: {
+    screen: SplashScreen,
   },
-  OptionScreen:{
-    screen:OptionScreen,
+  OptionScreen: {
+    screen: OptionScreen,
   },
-  SignUp:{
-    screen:SignUp,
+  SignUp: {
+    screen: SignUp,
   },
-  Information1:{
-    screen:Information1,
+  Information1: {
+    screen: Information1,
   },
-  SignIn:{
-    screen:SignIn,
+  SignIn: {
+    screen: SignIn,
   },
   HomeScreen: {
     screen: HomeScreen,
@@ -46,11 +47,14 @@ const App = createStackNavigator({
   PinCodeScreen: {
     screen: PinCodeScreen,
   },
-  PatientHistory:{
-    screen:PatientHistory,
+  PatientHistory: {
+    screen: PatientHistory,
   },
-  PersonalInfo:{
-    screen:PersonalInfo,
+  PersonalInfo: {
+    screen: PersonalInfo,
   },
+  PatientInfoScreen: {
+    screen: PatientInfoScreen,
+  }
 });
 export default createAppContainer(App);

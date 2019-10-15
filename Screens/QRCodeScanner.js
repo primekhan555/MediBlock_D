@@ -16,13 +16,24 @@ export default class QRCodeScanner extends Component {
         };
     }
     afterCodeScaning(qrvalues) {
-      var decoded=base64.decode(qrvalues);
+        var decoded = base64.decode(qrvalues);
         this.setState({
             qrvalue: decoded,
             openScanner: false,
         })
         AsyncStorage.setItem('DecodedData', JSON.stringify(decoded), () => {
-          this.props.navigation.navigate('PinCodeScreen');
+            AsyncStorage.getItem('DecodedData', (err, result) => {
+                if (result !== null) {
+                    var plainText = result;
+                    var halfText = plainText.split('#');
+                    if (halfText[13] == 'PatientInfoScreen'){
+                        this.props.navigation.navigate('PatientInfoScreen');
+                    }
+                    else{
+                        this.props.navigation.navigate('PinCodeScreen');
+                    }
+                }
+            })
         });
     }
     openScanner() {
@@ -61,17 +72,17 @@ export default class QRCodeScanner extends Component {
     }
 
     componentDidMount() {
-        
+
         let cnic = "16202-9275022-5".toString();
         // AsyncStorage.setItem('CNIC', JSON.stringify(cnic), () => {
-            
+
         //     console.log("i am inside")
         // })
     }
     render() {
 
         if (!this.state.openScanner) {
-          this.openScanner();
+            this.openScanner();
             return (
                 <View>
                     <ActivityIndicator size='large' animating={true} />
@@ -80,29 +91,29 @@ export default class QRCodeScanner extends Component {
         }
 
         return (
-        <View style={{flex:1}}>
-            <View style={styles.container}>
-                <CameraKitCameraScreen
-                    showFrame={true}
-                    heightForScannerFrame = {1000}
-                    offsetForScannerFrame = {10}
-                    scanBarcode={true}
-                    laserColor={'green'}
-                    frameColor={'red'}
-                    colorForScannerFrame={'black'}
-                    onReadCode={event =>
-                        this.afterCodeScaning(event.nativeEvent.codeStringValue)
-                    }
-                />
-            </View>
+            <View style={{ flex: 1 }}>
+                <View style={styles.container}>
+                    <CameraKitCameraScreen
+                        showFrame={true}
+                        heightForScannerFrame={1000}
+                        offsetForScannerFrame={10}
+                        scanBarcode={true}
+                        laserColor={'green'}
+                        frameColor={'red'}
+                        colorForScannerFrame={'black'}
+                        onReadCode={event =>
+                            this.afterCodeScaning(event.nativeEvent.codeStringValue)
+                        }
+                    />
+                </View>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        height:150,
-        marginTop:-50,        
+        height: 150,
+        marginTop: -50,
         justifyContent: 'center',
         backgroundColor: 'white'
     },

@@ -31,7 +31,6 @@ export default class PersonalInfo extends Component {
                     cnic: result,
                 })
             }
-
         }).then((result) => {
             const url = 'https://e4943289.ngrok.io/api/Doctor/';
             var nic = result;

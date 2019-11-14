@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -21,6 +21,10 @@ import PinCodeScreen from './Screens/PinCodeScreen';
 import PatientHistory from './Screens/PatientHistory';
 import PersonalInfo from './Screens/PersonalInfo';
 import PatientInfoScreen from './Screens/PatientInfoScreen';
+import VerifiedSummary from './Screens/VerifiedSummary';
+import UnVerifiedSummary from './Screens/UnVerifiedSummary';
+import UN_VerifiedDetail from './Screens/UN_VerifiedDetail';
+import VerifiedDetail from './Screens/VerifiedDetail';
 
 const App = createStackNavigator({
   SplashScreen: {
@@ -55,6 +59,18 @@ const App = createStackNavigator({
   },
   PatientInfoScreen: {
     screen: PatientInfoScreen,
+  },
+  UnVerifiedSummary: {
+    screen: UnVerifiedSummary,
+  },
+  VerifiedSummary: {
+    screen:VerifiedSummary,
+  },
+  UN_VerifiedDetail:{
+    screen:UN_VerifiedDetail,
+  },
+  VerifiedDetail:{
+    screen:VerifiedDetail,
   }
 });
 export default createAppContainer(App);

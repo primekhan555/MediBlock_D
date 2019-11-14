@@ -127,8 +127,17 @@ export default class Information1 extends Component {
                                         if (this.state.CNIC == '') {
                                             return;
                                         }
+                                        if (this.state.password) {
+                                            return;
+                                        }
+                                        if (this.state.fullName == '') {
+                                            return;
+                                        }
+                                        if (this.state.email == '') {
+                                            return;
+                                        }
                                         let block = {
-                                            "$class": "org.com.mediblocking.Doctor",
+                                            "$class": "org.com.mediblockinge1.Doctor",
                                             "nicNum": this.state.CNIC,
                                             "firstName": this.state.fullName,
                                             "lastName": this.state.password,
@@ -141,7 +150,7 @@ export default class Information1 extends Component {
                                             "Degree": "MBBS"
                                         }
 
-                                        fetch('https://e4943289.ngrok.io/api/Doctor/', {
+                                        fetch('https://a6885600.ngrok.io/api/Doctor/', {
                                             method: 'POST',
                                             headers: {
                                                 Accept: 'application/json',
@@ -164,7 +173,6 @@ export default class Information1 extends Component {
                                                 }
                                             })
                                         // console.log(this.state.dateofBirth); // Hours
-
                                     }}>
                                     <Text style={styles.textnextOpacity}>Next</Text>
                                 </TouchableOpacity>

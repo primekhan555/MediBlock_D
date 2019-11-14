@@ -50,7 +50,6 @@ export default class PatientInfoScreen extends Component {
                     fullDate: fullDate,
                     labTest: labTest,
                 });
-                // console.log(plainText);
             }
         })
     }
@@ -196,7 +195,7 @@ export default class PatientInfoScreen extends Component {
                                         })
                                     }
                                 }).then((result) => {
-                                    const url = 'https://e4943289.ngrok.io/api/Doctor/';
+                                    const url = 'https://a6885600.ngrok.io/api/Doctor/';
                                     var nic = result;
                                     var docCNICS = nic.replace(/['"]+/g, '')
                                     var join = url.concat(docCNICS);
@@ -211,27 +210,24 @@ export default class PatientInfoScreen extends Component {
                                         })
                                 })
                                     .then(() => {
-                                        // console.log(this.state.dataSource.firstName)
                                         this.setState({
                                             doctorName: this.state.dataSource.firstName,
                                         })
                                     })
                                     .then(() => {
-                                        var owner = 'org.com.mediblocking.Patient#';
+                                        var owner = 'org.com.mediblockinge1.Patient#';
                                         var clearingCNIC = this.state.CNIC;
                                         var ppCNIC = clearingCNIC.replace(/\\/g, "");
                                         var pppCNIC = ppCNIC.replace(/\\/g, "");
                                         const pCNIC = pppCNIC.replace(/['"]+/g, '');
                                         const removingDashes = pCNIC.replace(/-/g, '');
-                                        console.log(removingDashes)
-                                        console.log(pCNIC)
                                         var fullOwner = owner.concat(pCNIC)
                                         var miliSecond = new Date().getTime();
                                         // var pCNIC=this.state.CNIC;
                                         var diseaseId = removingDashes.concat(miliSecond).toString();
 
                                         let block = {
-                                            "$class": "org.com.mediblocking.Disease",
+                                            "$class": "org.com.mediblockinge1.Disease",
                                             "diseaseId": diseaseId,
                                             "nicNum": this.state.DCNIC,
                                             "doctorName": this.state.doctorName,
@@ -242,7 +238,7 @@ export default class PatientInfoScreen extends Component {
                                             "testResult": "Null",
                                             "patient": fullOwner
                                         }
-                                        fetch('https://e4943289.ngrok.io/api/Disease/', {
+                                        fetch('https://a6885600.ngrok.io/api/Disease/', {
                                             method: 'POST',
                                             headers: {
                                                 Accept: 'application/json',
@@ -252,7 +248,6 @@ export default class PatientInfoScreen extends Component {
                                         })
                                             .then((response) => response.status)
                                             .then((responseStatus) => {
-                                                console.log("this is the response from server" + responseStatus);
                                                 if (responseStatus == 200) {
                                                     this.props.navigation.navigate('HomeScreen')
                                                 }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar, TouchableOpacity, TouchableHighlight, AsyncStorage, Image, StyleSheet } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-
+// import ImgToBase64 from 'react-native-image-base64';
 // import ImagePicker from 'react-native-image-picker';
-import ImgToBase64 from 'react-native-image-base64';
 
 
 export default class PersonalInfo extends Component {
@@ -32,7 +31,7 @@ export default class PersonalInfo extends Component {
                 })
             }
         }).then((result) => {
-            const url = 'https://e4943289.ngrok.io/api/Doctor/';
+            const url = 'https://41b95361.ngrok.io/api/Doctor/';
             var nic = result;
             var CNICS = nic.replace(/['"]+/g, '')
             var join = url.concat(CNICS);
@@ -45,7 +44,7 @@ export default class PersonalInfo extends Component {
                     })
                 })
                 .then(() => {
-                    const url = 'https://e4943289.ngrok.io/api/DoctorPic/'
+                    const url = 'https://41b95361.ngrok.io/api/DoctorPic/'
                     var nicc = result;
                     var CNICSs = nicc.replace(/['"]+/g, '')
                     console.log(CNICSs)
@@ -105,7 +104,7 @@ export default class PersonalInfo extends Component {
 
                                     // const owner = classInfo.concat(nic);
                                     // console.log(this.state.cnic)
-                                    const url = 'https://e4943289.ngrok.io/api/DoctorPic/';
+                                    const url = 'https://41b95361.ngrok.io/api/DoctorPic/';
                                     const joining = url.concat(CNICS);
                                     return fetch(joining)
                                         .then((response) => response.status)
@@ -118,7 +117,7 @@ export default class PersonalInfo extends Component {
                                                 "DoctorP": "org.com.mediblocking.Doctor#16203-9275022-5",
                                             }
                                             if (responceStatus == 200 || responceStatus == 304) {
-                                                const puturl='https://e4943289.ngrok.io/api/DoctorPic/';
+                                                const puturl='https://41b95361.ngrok.io/api/DoctorPic/';
                                                 const fullUrl =puturl.concat(CNICS);
                                                 fetch(fullUrl, {
                                                     method: 'PUT',
@@ -130,7 +129,7 @@ export default class PersonalInfo extends Component {
                                                 })
                                             }
                                             else if (responceStatus == 404) {
-                                                return fetch('https://e4943289.ngrok.io/api/DoctorPic/', {
+                                                return fetch('https://41b95361.ngrok.io/api/DoctorPic/', {
                                                     method: 'POST',
                                                     headers: {
                                                         Accept: 'application/json',

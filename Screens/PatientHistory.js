@@ -1,167 +1,210 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, StatusBar, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { AsyncStorage } from 'react-native';
 // import HScrollCStyle from '../ScrollComponent/HScrollCStyle';
+import FlatListItemU from './Components/FlatListItemU';
+import FlatListItemV from './Components/FlatListItemV';
+import { IndicatorViewPager, PagerTitleIndicator } from 'rn-viewpager';
 
-class FlatListItem extends Component {
-    state = {
-        control: 'expand',
-        viewHeight: 150,
-        detail: '',
-        height: '',
-        textColor: 'green',
-    };
-    render() {
-        return (
-            <View style={{
-                flex: 1,
-                flexDirection: "column",
-                marginBottom: 9,
-                marginTop: 1,
-                height: this.state.viewHeight,
-                marginLeft: 10,
-                marginRight: 10,
-                borderRadius: 20,
-                borderColor: '#fff',
-                padding: 5,
-                alignItems: 'center',
-                backgroundColor: '#fff'//this.props.index % 2 == 0 ? '#9e8e8d' : '#ff6666'
-            }}
-            >
-                <TouchableOpacity onPress={() => {
-                    // alert("hello : " + this.props.index);
-                }}
+export default class PatientHistory extends Component {
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
+        let headerStyle={backgroundColor:'#b063c5'}
+        let headerRight = (
+            <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        params.goToVerified()
+                    }}
                     style={{
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0
-                    }}></TouchableOpacity>
-
-                <View style={{ marginTop: 5, flexDirection: "row", width: 150 }}>
-                    <Text style={{ color: '#000000', fontWeight: 'bold', fontSize: 17, textAlign: 'auto', textDecorationLine: "underline" }}>Appointment</Text>
-                    <Text style={{ marginStart: 50, color: this.state.textColor, textAlign: 'right' }}
-                        onPress={() => {
-                            if (this.state.control == "expand") {
-                                this.setState({
-                                    control: 'condense',
-                                    viewHeight: 280,
-                                    detail: this.props.item.diseaseType,
-                                    height: 20,
-                                    textColor: 'green'
-
-                                })
-                            }
-                            else if(this.state.control == "condense") {
-                                this.setState({
-                                    control: 'expand',
-                                    viewHeight: 150,
-                                    detail: '',
-                                    textColor:'green'
-                                })
-                            }
-                        }}
-                    >{this.state.control}</Text>
-                </View>
-                <View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ paddingLeft: 10, color: '#b0a9a9', fontSize: 15 }}>Doctor Name :</Text>
-                        <Text style={{ paddingLeft: 5, color: '#3b3030', fontSize: 15, fontWeight: 'bold' }}>{this.props.item.doctorName}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ paddingLeft: 10, color: '#b0a9a9', fontSize: 15 }}>Appointment Detail :</Text>
-                        <Text style={{ width: '40%', height: 25, paddingLeft: 5, color: '#3b3030', fontStyle: 'italic' }}>{this.props.item.diseaseType}</Text>
-                    </View>
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={{ paddingLeft: 10, color: '#b0a9a9', fontSize: 15 }}>Appointment Date :</Text>
-                        <Text style={{ paddingLeft: 5, color: '#3b3030' }}>{this.props.item.dateVisited}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ paddingLeft: 10, color: '#b0a9a9', fontSize: 15 }}>Age :</Text>
-                            <Text style={{ paddingLeft: 5, color: '#3b3030', fontWeight: 'bold' }}>{this.props.item.testResult}</Text>
-                        </View>
-                        <View style={{ marginLeft: 40, flexDirection: 'row' }}>
-                            <Text style={{ paddingLeft: 10, color: '#b0a9a9', fontSize: 15 }}>Weight :</Text>
-                            <Text style={{ paddingLeft: 5, color: '#3b3030', fontWeight: 'bold' }}>{this.props.item.type}</Text>
-                        </View>
-
-                    </View>
-                    {/* <View style={{height:this.state.height,}}><Text style={{color:'#ffffff'}}>{this.state.detail}</Text></View>
-                    <View style={{height:this.state.height}}><Text style={{color:'#ffffff'}}>{this.state.detail}</Text></View>
-                    <View style={{height:this.state.height}}><Text style={{color:'#ffffff'}}>{this.state.detail}</Text></View>
-                    <View style={{height:this.state.height}}><Text style={{color:'#ffffff'}}>{this.state.detail}</Text></View>
-                    <View style={{height:this.state.height}}><Text style={{color:'#ffffff'}}>{this.state.detail}</Text></View>
-                    <View style={{height:this.state.height}}><Text style={{color:'#ffffff'}}>{this.state.detail}</Text></View> */}
-                </View>
+                        marginRight: 10,
+                        backgroundColor: 'white',
+                        width: 95,
+                        height: 30,
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        borderRadius: 4
+                    }}>
+                    <Text style=
+                        {{
+                            color: '#b063c5',
+                            fontWeight: 'bold',
+                            alignSelf: 'center'
+                        }}>V-Summary</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        params.goToUnVerified()
+                    }}
+                    style={{
+                        marginRight: 10,
+                        backgroundColor: 'white',
+                        width: 95,
+                        height: 30,
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        borderRadius: 4
+                    }}>
+                    <Text style=
+                        {{
+                            color: '#b063c5',
+                            fontWeight: 'bold',
+                            alignSelf: 'center'
+                        }}>UN-Summary</Text>
+                </TouchableOpacity>
             </View>
         );
+        return { headerRight, headerStyle };
+
     }
-}
-export default class PatientHistory extends Component {
+
     constructor(props) {
         super(props);
     }
     state = {
-        dataSource: [],
+        dataSource1: [],
+        dataSource2: [],
         isloading: true,
-        CNIC: '',//this.props.navigation.getParam('CNIC', ''),
+        CNIC: '',
         patterns: false
     };
+    _goToVerified() {
+        let dataSource1 = this.state.dataSource1;
+        AsyncStorage.setItem('dataSource1', JSON.stringify(dataSource1), () => {
+            this.props.navigation.navigate('VerifiedSummary',{
+                dataSource1:dataSource1
+            })
+        })
+    }
+    _goToUnVerified() {
+        let dataSource2 = this.state.dataSource2;
+        AsyncStorage.setItem('dataSource2', JSON.stringify(dataSource2), () => {
+            this.props.navigation.navigate('UnVerifiedSummary')
+        })
+        
+    }
     componentDidMount() {
+        this.props.navigation.setParams({ goToVerified: this._goToVerified.bind(this) })
+        this.props.navigation.setParams({ goToUnVerified: this._goToUnVerified.bind(this) })
         AsyncStorage.getItem('CNIC', (err, result) => {
             this.setState({
                 CNIC: result,
             })
         });
-        return fetch('https://e4943289.ngrok.io/api/Disease/')
+        fetch('https://a6885600.ngrok.io/api/VerifiedDisease/')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    dataSource: responseJson,
-                    isloading: false
+                    dataSource1: responseJson,
+                    isloading: false,
                 })
             })
             .catch((error) => {
-                console.error(error);
+                this.setState({
+                    isloading: true,
+                })
             });
+
+        fetch('https://a6885600.ngrok.io/api/UnVerifiedDisease/')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    dataSource2: responseJson,
+                    isloading: false,
+                })
+            })
+            .catch((error) => {
+                this.setState({
+                    isloading: true,
+                })
+            });
+
     }
+
     render() {
         if (this.state.isloading) {
             return (
-                <View style={{flex:1, justifyContent:'center'}}>
-                    <ActivityIndicator size='large' animating={true} />
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <StatusBar backgroundColor='#b063c5' />
+                    <IndicatorViewPager
+                        style={{ flex: 1, backgroundColor: 'white', }}
+                        indicator={this._renderTitleIndicator()}>
+                        <View style={{ flex: 1, backgroundColor: '#e8ebea', justifyContent: 'center' }}>
+                            <ActivityIndicator style={{ justifyContent: 'center' }} size='large' animating={true} />
+                        </View>
+                        <View style={{ flex: 1, backgroundColor: '#e8ebea', justifyContent: 'center' }}>
+                            <ActivityIndicator size='large' animating={true} />
+                        </View>
+                    </IndicatorViewPager>
                 </View>
             )
         }
         else {
             return (
-                <View style={{ flex: 1, backgroundColor: '#e3dede' }}>
-                    <FlatList
-                        data={this.state.dataSource}
-                        renderItem={({ item, index }) => {
-                            const owners = item.patient;
-                            var ownerId = owners.split('#');
-                            const CNICS = this.state.CNIC.replace(/['"]+/g, '');
-                            var finalData = CNICS.replace(/\\/g, "");
-                            const final = finalData.replace(/['"]+/g, '');
-                            console.log("without" + final)
-                            if (ownerId[1] == final) {
-                                return (
-                                    <FlatListItem item={item} index={index.toString()} />
-                                )
-                            }
-                            else {
-                                console.log("if is not executing")
-                            }
-                        }}
-                        keyExtractor={(item, index) => index.toString()} />
+                <View style={{ flex: 1, backgroundColor: '#e8ebea' }}>
+                    <StatusBar backgroundColor='#b063c5' />
+
+                    <IndicatorViewPager
+                        style={{ flex: 1, backgroundColor: 'white' }}
+                        indicator={this._renderTitleIndicator()}>
+
+
+                        <View style={{ flex: 1, backgroundColor: '#e3dede' }}>
+                            <FlatList
+                                data={this.state.dataSource1}
+                                renderItem={({ item, index }) => {
+                                    const owners = item.patient;
+                                    var ownerId = owners.split('#');
+                                    const CNICS = this.state.CNIC.replace(/['"]+/g, '');
+                                    var finalData = CNICS.replace(/\\/g, "");
+                                    const final = finalData.replace(/['"]+/g, '');
+                                    if (ownerId[1] == final) {
+                                        return (
+                                            <FlatListItemV item={item} index={index.toString()} />
+                                        )
+                                    }
+                                    else {
+                                        console.log("if is not executing")
+                                    }
+                                }}
+                                keyExtractor={(item, index) => index.toString()} />
+                        </View>
+                        <View style={{ flex: 1, backgroundColor: '#e3dede' }}>
+                            <FlatList
+                                data={this.state.dataSource2}
+                                renderItem={({ item, index }) => {
+                                    const owners = item.patient;
+                                    var ownerId = owners.split('#');
+                                    const CNICS = this.state.CNIC.replace(/['"]+/g, '');
+                                    var finalData = CNICS.replace(/\\/g, "");
+                                    const final = finalData.replace(/['"]+/g, '');
+                                    if (ownerId[1] == final) {
+                                        return (
+                                            <FlatListItemU item={item} index={index.toString()} />
+                                        )
+                                    }
+                                    else {
+                                        console.log("if is not executing")
+                                    }
+                                }}
+                                keyExtractor={(item, index) => index.toString()} />
+                        </View>
+
+                    </IndicatorViewPager>
                 </View>
+
             )
         }
         {/* ) */ }
 
+    }
+    _renderTitleIndicator() {
+        return <PagerTitleIndicator
+            style={{
+                width: "100%",
+                height: 30
+            }}
+            titles={['               Verified          ', '                UN_Verified          ']} />;
     }
 
 }

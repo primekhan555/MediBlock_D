@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { 
-    View, 
-    ActivityIndicator, 
-    PermissionsAndroid, 
-    Platform, 
-    StyleSheet, 
-    AsyncStorage } from 'react-native';
+import {
+    View,
+    ActivityIndicator,
+    PermissionsAndroid,
+    Platform,
+    StyleSheet,
+    AsyncStorage
+} from 'react-native';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import base64 from 'react-native-base64';
 
@@ -32,10 +33,10 @@ export default class QRCodeScanner extends Component {
                 if (result !== null) {
                     var plainText = result;
                     var halfText = plainText.split('#');
-                    if (halfText[3] == "PatientInfoScreen"){
+                    if (halfText[3] == "PatientInfoScreen") {
                         this.props.navigation.navigate('PatientInfoScreen');
                     }
-                    else{
+                    else {
                         this.props.navigation.navigate('PinCodeScreen');
                     }
                 }

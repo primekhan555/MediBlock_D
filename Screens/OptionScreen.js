@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 
-let {width, height} = Dimensions.get('window');
+let { width, height } = Dimensions.get('window');
 
 export default class OptionsScreen extends Component {
     static navigationOptions = {
         header: null,
         headerLeft: null
     }
-
-
     constructor(props) {
         super(props)
     }
@@ -20,14 +18,14 @@ export default class OptionsScreen extends Component {
                 <View style={styles.nameContainer}>
                     <Text style={styles.nameText}>MediBlock</Text>
                     <Text style={{
-                        color:'#ffffff',
-                        alignContent:"center",
-                        justifyContent:"center",
-                        marginTop:3,
-                        fontSize:35,
-                        fontWeight:"bold",
-                        letterSpacing:1.2
-                        }}>Doc</Text>
+                        color: '#ffffff',
+                        alignContent: "center",
+                        justifyContent: "center",
+                        marginTop: 3,
+                        fontSize: 35,
+                        fontWeight: "bold",
+                        letterSpacing: 1.2
+                    }}>Doc</Text>
                 </View>
 
                 <View style={styles.optionContainer}>
@@ -75,8 +73,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         marginTop: 200,
-        fontWeight:"bold",
-        letterSpacing:1.2
+        fontWeight: "bold",
+        letterSpacing: 1.2
     },
     signInView: {
         alignItems: 'center',
